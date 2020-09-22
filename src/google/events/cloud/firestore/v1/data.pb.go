@@ -57,14 +57,6 @@ type DocumentEventData struct {
 	// A DocumentMask object that lists changed fields.
 	// This is only populated for update events.
 	UpdateMask *DocumentMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// The matches from wildcards specified in the event subscription, to the
-	// values of those wildcards in the document name. For example,
-	// a subscription to
-	// `/projects/my_project/databases/(default)/documents/users/{username}`
-	// matching a document with name
-	// `/projects/my_project/databases/(default)/documents/users/marie`
-	// would result in a mapping of `'username': 'marie'`.
-	Wildcards map[string]string `protobuf:"bytes,4,rep,name=wildcards,proto3" json:"wildcards,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *DocumentEventData) Reset() {
@@ -116,13 +108,6 @@ func (x *DocumentEventData) GetOldValue() *Document {
 func (x *DocumentEventData) GetUpdateMask() *DocumentMask {
 	if x != nil {
 		return x.UpdateMask
-	}
-	return nil
-}
-
-func (x *DocumentEventData) GetWildcards() map[string]string {
-	if x != nil {
-		return x.Wildcards
 	}
 	return nil
 }
@@ -636,7 +621,7 @@ var file_google_events_cloud_firestore_v1_data_proto_rawDesc = []byte{
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74,
 	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x18,
 	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x2f, 0x6c, 0x61, 0x74, 0x6c,
-	0x6e, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x8f, 0x03, 0x0a, 0x11, 0x44, 0x6f, 0x63,
+	0x6e, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xef, 0x01, 0x0a, 0x11, 0x44, 0x6f, 0x63,
 	0x75, 0x6d, 0x65, 0x6e, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x40,
 	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2a, 0x2e,
 	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x2e, 0x63, 0x6c,
@@ -651,17 +636,7 @@ var file_google_events_cloud_firestore_v1_data_proto_rawDesc = []byte{
 	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x2e, 0x63,
 	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x66, 0x69, 0x72, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2e, 0x76,
 	0x31, 0x2e, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x4d, 0x61, 0x73, 0x6b, 0x52, 0x0a,
-	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x61, 0x73, 0x6b, 0x12, 0x60, 0x0a, 0x09, 0x77, 0x69,
-	0x6c, 0x64, 0x63, 0x61, 0x72, 0x64, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x42, 0x2e,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x2e, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x2e, 0x66, 0x69, 0x72, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2e, 0x76, 0x31,
-	0x2e, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x44, 0x61,
-	0x74, 0x61, 0x2e, 0x57, 0x69, 0x6c, 0x64, 0x63, 0x61, 0x72, 0x64, 0x73, 0x45, 0x6e, 0x74, 0x72,
-	0x79, 0x52, 0x09, 0x77, 0x69, 0x6c, 0x64, 0x63, 0x61, 0x72, 0x64, 0x73, 0x1a, 0x3c, 0x0a, 0x0e,
-	0x57, 0x69, 0x6c, 0x64, 0x63, 0x61, 0x72, 0x64, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10,
-	0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79,
-	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x2f, 0x0a, 0x0c, 0x44, 0x6f,
+	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x61, 0x73, 0x6b, 0x22, 0x2f, 0x0a, 0x0c, 0x44, 0x6f,
 	0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x4d, 0x61, 0x73, 0x6b, 0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x69,
 	0x65, 0x6c, 0x64, 0x5f, 0x70, 0x61, 0x74, 0x68, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52,
 	0x0a, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x50, 0x61, 0x74, 0x68, 0x73, 0x22, 0xcc, 0x02, 0x0a, 0x08,
@@ -758,7 +733,7 @@ func file_google_events_cloud_firestore_v1_data_proto_rawDescGZIP() []byte {
 	return file_google_events_cloud_firestore_v1_data_proto_rawDescData
 }
 
-var file_google_events_cloud_firestore_v1_data_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_google_events_cloud_firestore_v1_data_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_google_events_cloud_firestore_v1_data_proto_goTypes = []interface{}{
 	(*DocumentEventData)(nil),   // 0: google.events.cloud.firestore.v1.DocumentEventData
 	(*DocumentMask)(nil),        // 1: google.events.cloud.firestore.v1.DocumentMask
@@ -766,35 +741,33 @@ var file_google_events_cloud_firestore_v1_data_proto_goTypes = []interface{}{
 	(*Value)(nil),               // 3: google.events.cloud.firestore.v1.Value
 	(*ArrayValue)(nil),          // 4: google.events.cloud.firestore.v1.ArrayValue
 	(*MapValue)(nil),            // 5: google.events.cloud.firestore.v1.MapValue
-	nil,                         // 6: google.events.cloud.firestore.v1.DocumentEventData.WildcardsEntry
-	nil,                         // 7: google.events.cloud.firestore.v1.Document.FieldsEntry
-	nil,                         // 8: google.events.cloud.firestore.v1.MapValue.FieldsEntry
-	(*timestamp.Timestamp)(nil), // 9: google.protobuf.Timestamp
-	(_struct.NullValue)(0),      // 10: google.protobuf.NullValue
-	(*latlng.LatLng)(nil),       // 11: google.type.LatLng
+	nil,                         // 6: google.events.cloud.firestore.v1.Document.FieldsEntry
+	nil,                         // 7: google.events.cloud.firestore.v1.MapValue.FieldsEntry
+	(*timestamp.Timestamp)(nil), // 8: google.protobuf.Timestamp
+	(_struct.NullValue)(0),      // 9: google.protobuf.NullValue
+	(*latlng.LatLng)(nil),       // 10: google.type.LatLng
 }
 var file_google_events_cloud_firestore_v1_data_proto_depIdxs = []int32{
 	2,  // 0: google.events.cloud.firestore.v1.DocumentEventData.value:type_name -> google.events.cloud.firestore.v1.Document
 	2,  // 1: google.events.cloud.firestore.v1.DocumentEventData.old_value:type_name -> google.events.cloud.firestore.v1.Document
 	1,  // 2: google.events.cloud.firestore.v1.DocumentEventData.update_mask:type_name -> google.events.cloud.firestore.v1.DocumentMask
-	6,  // 3: google.events.cloud.firestore.v1.DocumentEventData.wildcards:type_name -> google.events.cloud.firestore.v1.DocumentEventData.WildcardsEntry
-	7,  // 4: google.events.cloud.firestore.v1.Document.fields:type_name -> google.events.cloud.firestore.v1.Document.FieldsEntry
-	9,  // 5: google.events.cloud.firestore.v1.Document.create_time:type_name -> google.protobuf.Timestamp
-	9,  // 6: google.events.cloud.firestore.v1.Document.update_time:type_name -> google.protobuf.Timestamp
-	10, // 7: google.events.cloud.firestore.v1.Value.null_value:type_name -> google.protobuf.NullValue
-	9,  // 8: google.events.cloud.firestore.v1.Value.timestamp_value:type_name -> google.protobuf.Timestamp
-	11, // 9: google.events.cloud.firestore.v1.Value.geo_point_value:type_name -> google.type.LatLng
-	4,  // 10: google.events.cloud.firestore.v1.Value.array_value:type_name -> google.events.cloud.firestore.v1.ArrayValue
-	5,  // 11: google.events.cloud.firestore.v1.Value.map_value:type_name -> google.events.cloud.firestore.v1.MapValue
-	3,  // 12: google.events.cloud.firestore.v1.ArrayValue.values:type_name -> google.events.cloud.firestore.v1.Value
-	8,  // 13: google.events.cloud.firestore.v1.MapValue.fields:type_name -> google.events.cloud.firestore.v1.MapValue.FieldsEntry
-	3,  // 14: google.events.cloud.firestore.v1.Document.FieldsEntry.value:type_name -> google.events.cloud.firestore.v1.Value
-	3,  // 15: google.events.cloud.firestore.v1.MapValue.FieldsEntry.value:type_name -> google.events.cloud.firestore.v1.Value
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	6,  // 3: google.events.cloud.firestore.v1.Document.fields:type_name -> google.events.cloud.firestore.v1.Document.FieldsEntry
+	8,  // 4: google.events.cloud.firestore.v1.Document.create_time:type_name -> google.protobuf.Timestamp
+	8,  // 5: google.events.cloud.firestore.v1.Document.update_time:type_name -> google.protobuf.Timestamp
+	9,  // 6: google.events.cloud.firestore.v1.Value.null_value:type_name -> google.protobuf.NullValue
+	8,  // 7: google.events.cloud.firestore.v1.Value.timestamp_value:type_name -> google.protobuf.Timestamp
+	10, // 8: google.events.cloud.firestore.v1.Value.geo_point_value:type_name -> google.type.LatLng
+	4,  // 9: google.events.cloud.firestore.v1.Value.array_value:type_name -> google.events.cloud.firestore.v1.ArrayValue
+	5,  // 10: google.events.cloud.firestore.v1.Value.map_value:type_name -> google.events.cloud.firestore.v1.MapValue
+	3,  // 11: google.events.cloud.firestore.v1.ArrayValue.values:type_name -> google.events.cloud.firestore.v1.Value
+	7,  // 12: google.events.cloud.firestore.v1.MapValue.fields:type_name -> google.events.cloud.firestore.v1.MapValue.FieldsEntry
+	3,  // 13: google.events.cloud.firestore.v1.Document.FieldsEntry.value:type_name -> google.events.cloud.firestore.v1.Value
+	3,  // 14: google.events.cloud.firestore.v1.MapValue.FieldsEntry.value:type_name -> google.events.cloud.firestore.v1.Value
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_google_events_cloud_firestore_v1_data_proto_init() }
@@ -895,7 +868,7 @@ func file_google_events_cloud_firestore_v1_data_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_google_events_cloud_firestore_v1_data_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
